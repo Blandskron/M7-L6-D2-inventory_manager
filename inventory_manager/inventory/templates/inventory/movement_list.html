@@ -1,0 +1,28 @@
+{% extends 'inventory/base.html' %}
+{% block content %}
+
+<h2>Lista de Movimientos</h2>
+<a href="{% url 'movement_create' %}">Nuevo Movimiento</a>
+
+<table border="1">
+<tr>
+    <th>Producto</th>
+    <th>Tipo</th>
+    <th>Cantidad</th>
+    <th>Fecha</th>
+    <th>Acciones</th>
+</tr>
+{% for movement in movements %}
+<tr>
+    <td>{{ movement.product.name }}</td>
+    <td>{{ movement.movement_type }}</td>
+    <td>{{ movement.quantity }}</td>
+    <td>{{ movement.created_at }}</td>
+    <td>
+        <a href="{% url 'movement_delete' movement.id %}">Eliminar</a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema MVC Inventario</title>
+</head>
+<body>
+    <h1>Sistema de Inventario</h1>
+    <nav>
+        <a href="{% url 'product_list' %}">Productos</a> |
+        <a href="{% url 'movement_list' %}">Movimientos</a>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

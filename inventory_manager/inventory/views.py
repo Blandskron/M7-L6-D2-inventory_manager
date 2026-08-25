@@ -66,6 +66,18 @@ def movement_create(request):
     return render(request, 'inventory/movement_form.html', {'form': form})
 
 
+def movement_update(request, id):
+    movement = get_object_or_404(Movement, id=id)
+    if request.method == 'POST':
+        form = MovementForm(request.POST, instance=movement)
+        if form.is_valid():
+            form.save()
+            return redirect('movement_list')
+    else:
+        form = MovementForm(instance=movement)
+    return render(request, 'inventory/movement_form.html', {'form': form})
+
+
 def movement_delete(request, id):
     movement = get_object_or_404(Movement, id=id)
     if request.method == 'POST':

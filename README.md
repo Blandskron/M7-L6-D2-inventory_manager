@@ -1,5 +1,14 @@
 # Sistema MVC de Inventario (CRUD + CSRF)
 
+## Cobertura del aula
+
+Este proyecto cumple los resultados 6, 6.1, 6.2 y 6.3: emplea los modelos `Product` y `Movement` como capa de acceso a datos, vistas y templates MVC para CRUD completo, y el ORM de Django mediante `objects.all()`, `get_object_or_404()`, `form.save()`, `delete()`, `select_related()` y `F()`.
+
+- CSRF: todos los formularios POST incluyen `{% csrf_token %}` y el middleware CSRF está activo.
+- Enrutamiento: las rutas se incluyen desde el proyecto e incorporan parámetros, por ejemplo `products/edit/<int:id>/` y `movements/delete/<int:id>/`.
+- Relaciones: cada `Movement` está asociado a un `Product` por `ForeignKey`; al crear, editar o eliminar un movimiento el stock se ajusta de manera consistente.
+- Pruebas: `python manage.py test` verifica CRUD, CSRF, rutas parametrizadas, ORM y stock.
+
 ## 1) Crear entorno virtual
 
 ```bash
@@ -132,3 +141,13 @@ python manage.py runserver
 
 * Productos: `http://127.0.0.1:8000/products/`
 * Movimientos: `http://127.0.0.1:8000/movements/`
+
+## Ejecutar con Docker
+
+Desde la raíz del repositorio:
+
+```bash
+docker compose up --build
+```
+
+El `entrypoint.sh` aplica migraciones y crea el superusuario en el primer inicio. Configura `DJANGO_SUPERUSER_USERNAME`, `DJANGO_SUPERUSER_EMAIL` y `DJANGO_SUPERUSER_PASSWORD` en un archivo `.env` para reemplazar las credenciales de ejemplo. La base SQLite queda persistida en el volumen `inventory_data`.

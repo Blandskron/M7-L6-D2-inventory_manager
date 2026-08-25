@@ -12,5 +12,6 @@ urlpatterns = [
     # MOVIMIENTOS
     path('movements/', views.movement_list, name='movement_list'),
     path('movements/create/', views.movement_create, name='movement_create'),
+    path('movements/edit/<int:id>/', views.movement_update, name='movement_update'),
     path('movements/delete/<int:id>/', views.movement_delete, name='movement_delete'),
 ]
